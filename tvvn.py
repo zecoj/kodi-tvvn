@@ -28,55 +28,53 @@ fanart = xbmc.translatePath( os.path.join( home, 'fanart.jpg' ) )
 
 # CONFIGURATION
 # See here for more IP's http://www.vtc.com.vn/XMLStart.aspx
-VTCURLList=[    'rtmp://66.160.142.201/live',
-		'rtmp://66.160.142.198/live',
-		'rtmp://66.160.142.197/live']
+VTCURLList=['rtmp://66.160.142.201/live',
+			'rtmp://66.160.142.198/live',
+			'rtmp://66.160.142.197/live']
 from random import choice
 VTCURL=choice(VTCURLList)
 
 # provider_name = [stream url, swf player url, referrer url]
 provider_vtc = [VTCURL,'http://vtc.com.vn/player.swf','http://vtc.com.vn/#']
-#provider_tv24 = ['rtmp://112.197.2.11:1935/live','http://tv24.vn/WebMedia/mediaplayer/vplayer.swf','http://www.tv24.vn']
 provider_tv24 = ['rtmp://112.197.2.11/live','http://tv24.vn/WebMedia/mediaplayer/vplayer.swf','http://www.tv24.vn']
 
 mode=None
 
 def get_params():
-        param=[]
-        paramstring=sys.argv[2]
-        if len(paramstring)>=2:
-                params=sys.argv[2]
-                cleanedparams=params.replace('?','')
-                if (params[len(params)-1]=='/'):
-                        params=params[0:len(params)-2]
-                pairsofparams=cleanedparams.split('&')
-                param={}
-                for i in range(len(pairsofparams)):
-                        splitparams={}
-                        splitparams=pairsofparams[i].split('=')
-                        if (len(splitparams))==2:
-                                param[splitparams[0]]=splitparams[1]
-                                
-        return param
+	param=[]
+	paramstring=sys.argv[2]
+	if len(paramstring)>=2:
+		params=sys.argv[2]
+		cleanedparams=params.replace('?','')
+		if (params[len(params)-1]=='/'):
+			params=params[0:len(params)-2]
+			pairsofparams=cleanedparams.split('&')
+			param={}
+			for i in range(len(pairsofparams)):
+				splitparams={}
+				splitparams=pairsofparams[i].split('=')
+				if (len(splitparams))==2:
+					param[splitparams[0]]=splitparams[1]
+	return param
 
 params=get_params()
 
 try:
-        stream_name=urllib.unquote_plus(params["stream_name"])
+	stream_name=urllib.unquote_plus(params["stream_name"])
 except:
-        pass
+	pass
 try:
-        ref=urllib.unquote_plus(params["ref"])
+	ref=urllib.unquote_plus(params["ref"])
 except:
-        pass
+	pass
 try:
-        provider=urllib.unquote_plus(params["provider"])
+	provider=urllib.unquote_plus(params["provider"])
 except:
-        pass
+	pass
 try:
-        mode=int(params["mode"])
+	mode=int(params["mode"])
 except:
-        pass
+	pass
 
 def addLink(name,provider,stream_name,ref,iconimage):
 	ok = True
@@ -87,7 +85,6 @@ def addLink(name,provider,stream_name,ref,iconimage):
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=give_url,listitem=liz)
 
 def addDirectoryLink(name, lmode, iconimage):
-	#li = xbmcgui.ListItem(name)
 	li = xbmcgui.ListItem( name, iconImage=xbmc.translatePath(os.path.join(home, iconimage)), thumbnailImage=xbmc.translatePath(os.path.join(home, iconimage)))
 	li.setInfo(type="Video", infoLabels={"Title": name})
 	li.setProperty("Fanart_Image",fanart)
