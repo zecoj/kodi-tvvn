@@ -14,8 +14,8 @@
 		<platform>all</platform>
 		<summary lang="en">TV Viet Nam</summary>
 		<summary lang="vi">TV Việt Nam</summary>
-		<description lang="en">This plugin allows you to watch live TV channels or listen to radio stations in Viet Nam.</description>
-		<description lang="vi">Xem trực tiếp các kênh truyền hình và các đài phát thanh từ Việt Nam</description>
+		<description lang="en">This plugin allows you to watch live TV channels or listen to radio stations in Viet Nam. Please report bugs to http://zecoj.com/</description>
+		<description lang="vi">Xem trực tiếp các kênh truyền hình và các đài phát thanh từ Việt Nam. Vui lòng báo lỗi nếu gặp tại http://zecoj.com/</description>
 		<disclaimer lang="en">all live streams are pulled from vtc.com.vn and tv24.com.vn</disclaimer>
 		<disclaimer lang="vi">tất cả các live streams được lấy từ vtc.com.vn và tv24.com.vn</disclaimer>
 	</extension>
