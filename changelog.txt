@@ -1,5 +1,5 @@
 version 0.7 (26/04/2012):
- * user can now show/hide channels descriptions via "Add-on Settings"
+ * users can now show/hide channels descriptions via "Add-on Settings"
    (all descriptions are UTF-8 Vietnamese, users will need skins with
    Unicode fonts, or disable channels descriptions)
  * more channels (ANTV and 11 local channels)
