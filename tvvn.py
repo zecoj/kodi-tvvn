@@ -48,6 +48,7 @@ src_vtc =  [VTCURL,
 TV24URLList=['rtmp://112.197.2.16:1935/live',
 			'rtmp://112.197.2.11:1935/live']
 TV24URL=choice(TV24URLList)
+
 src_tv24=  [TV24URL,
 			'http://tv24.vn/jwplayer/player.swf',
 			'http://www.tv24.vn']
@@ -147,7 +148,6 @@ def show_menu_local():
 	add_link('LA34', 'src_tv24',  'la34.stream',  '',   '', 'Long An')
 	add_link('THVL1', 'src_tv24',  'thvl1.stream',  '',   '', 'Vĩnh Long')
 	add_link('ĐN1', 'src_tv24',  'dn1.stream',  '',   '', 'Đồng Nai 1')
-	#add_link('ĐN2', 'src_tv24',  'dn2.stream',  '',   '', 'Đồng Nai 2')
 	add_link('HGV', 'src_tv24',  'thhg.stream',  '',   '', 'Hậu Giang')
 	add_link('STV', 'src_tv24',  'thst.stream',  '',   '', 'Sóc Trăng')
 	add_link('THTG', 'src_tv24',  'thtg.stream',  '',   '', 'Tiền Giang')
@@ -200,10 +200,7 @@ def play_video(src, stream_name, ref):
 	fullURL=videoUrl+' swfVfy=1 live=1 playpath='+stream_name+' flashVer='+flashVer+' app=live pageUrl='+pageUrl+'/ tcUrl='+videoUrl+' swfUrl='+swfUrl 
 	if src == "src_tv24":
 		fullURL=prov[0].replace("rtmp://","http://")+"/"+stream_name+"/playlist.m3u8"
-	print fullURL
-	print "----------------------------"
 	xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(fullURL, item)
-	#xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play("http://112.197.2.11:1935/live/SDsctv16.stream/playlist.m3u8", item)
 
 if mode==None:
 	Init()
