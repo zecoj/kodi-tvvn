@@ -25,7 +25,6 @@ profile = xbmc.translatePath(addon.getAddonInfo('profile'))
 mysettings = xbmcaddon.Addon(id='plugin.video.tvvn')
 home = mysettings.getAddonInfo('path')
 fanart = xbmc.translatePath(os.path.join(home, 'fanart.jpg'))
-pluginhandle = int (sys.argv[1])
 
 #---------------------------------------------------------------------
 # CONFIGURATION STARTS
@@ -103,8 +102,11 @@ except:
 
 def add_link(name,src,stream_name,ref,iconimage,desc):
 	ok = True
-	if (xbmcplugin.getSetting(pluginhandle,'descriptions')=='true' and desc != ''):
-		name = name+"    "+desc
+	if (mysettings.getSetting('descriptions')=='true' and desc != ''):
+		if mysettings.getSetting('descriptions_on_right') == 'false':
+			name = desc+"    "+name
+		else:
+			name = name+"    "+desc
 	give_url = sys.argv[0]+"?mode=1&stream_name="+stream_name+"&ref="+ref+"&src="+src
 	liz = xbmcgui.ListItem( name, iconImage=xbmc.translatePath(os.path.join(home, iconimage)), thumbnailImage=xbmc.translatePath(os.path.join(home, iconimage)))
 	liz.setInfo(type="Video", infoLabels={"Title": name})
@@ -113,8 +115,11 @@ def add_link(name,src,stream_name,ref,iconimage,desc):
 
 def add_directory_link(name, lmode, iconimage,desc):
 	name = "["+name+"]"
-	if (xbmcplugin.getSetting(pluginhandle,'descriptions')=='true' and desc != ''):
-		name = name+"    "+desc
+	if (mysettings.getSetting('descriptions')=='true' and desc != ''):
+		if mysettings.getSetting('descriptions_on_right') == 'false':
+			name = desc+"    "+name
+		else:
+			name = name+"    "+desc
 	li = xbmcgui.ListItem( name, iconImage=xbmc.translatePath(os.path.join(home, iconimage)), thumbnailImage=xbmc.translatePath(os.path.join(home, iconimage)))
 	li.setInfo(type="Video", infoLabels={"Title": name})
 	li.setProperty("Fanart_Image",fanart)
@@ -198,7 +203,7 @@ def play_video(src, stream_name, ref):
 	flashVer='LNX_11,2,202,233'
 
 	fullURL=videoUrl+' swfVfy=1 live=1 playpath='+stream_name+' flashVer='+flashVer+' app=live pageUrl='+pageUrl+'/ tcUrl='+videoUrl+' swfUrl='+swfUrl 
-	if src == "src_tv24":
+	if (src == "src_tv24" and mysettings.getSetting('tv24_http') == 'true'):
 		fullURL=prov[0].replace("rtmp://","http://")+"/"+stream_name+"/playlist.m3u8"
 	xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(fullURL, item)
 
