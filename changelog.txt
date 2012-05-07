@@ -1,4 +1,5 @@
 version 0.7.2 (07/05/2012):
+ * show channel's name on "Information screen" during playback
  * the following options are now available under "Add-on settings"
    - user can now move the channels' descriptions to the left of channels'
      names (this makes skins with right-aligned lists looks nicer)

@@ -84,6 +84,10 @@ def get_params():
 params=get_params()
 
 try:
+	stream_short_name=urllib.unquote_plus(params["stream_short_name"])
+except:
+	pass
+try:
 	stream_name=urllib.unquote_plus(params["stream_name"])
 except:
 	pass
@@ -102,12 +106,13 @@ except:
 
 def add_link(name,src,stream_name,ref,iconimage,desc):
 	ok = True
+	short_name=name
 	if (mysettings.getSetting('descriptions')=='true' and desc != ''):
 		if mysettings.getSetting('descriptions_on_right') == 'false':
 			name = desc+"    "+name
 		else:
 			name = name+"    "+desc
-	give_url = sys.argv[0]+"?mode=1&stream_name="+stream_name+"&ref="+ref+"&src="+src
+	give_url = sys.argv[0]+"?mode=1&stream_name="+stream_name+"&ref="+ref+"&src="+src+"&stream_short_name="+short_name
 	liz = xbmcgui.ListItem( name, iconImage=xbmc.translatePath(os.path.join(home, iconimage)), thumbnailImage=xbmc.translatePath(os.path.join(home, iconimage)))
 	liz.setInfo(type="Video", infoLabels={"Title": name})
 	liz.setProperty("Fanart_Image",fanart)
@@ -193,9 +198,9 @@ def Init():
 
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def play_video(src, stream_name, ref):
+def play_video(src, name, stream_name, ref):
 	prov = globals()[src]
-	item = xbmcgui.ListItem("TVVN")
+	item = xbmcgui.ListItem(name)
 
 	pageUrl=prov[2]+"/"+ref
 	videoUrl=prov[0]+"/"+stream_name
@@ -210,7 +215,7 @@ def play_video(src, stream_name, ref):
 if mode==None:
 	Init()
 elif mode==1:
-	play_video(src, stream_name, ref)
+	play_video(src, stream_short_name, stream_name, ref)
 elif mode==10:
 	show_menu_sctv()
 elif mode==11:
