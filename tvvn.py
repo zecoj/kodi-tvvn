@@ -73,31 +73,37 @@ src_vantv = 	['rtmp://flash67.ustream.tv:1935/ustreamVideo/3097098',
 			 	'http://www.552vantv.com',
 				'']
 
+# little saigon tv
 src_lsgtv = 	['rtmp://stream.s15.cpanelservices.com/lstvlive',
 		  		'http://vietpho.com/ext/js/5.1/player-licensed.swf',
 			 	'http://vietpho.com/online-channels.php?id=2&gID=0&page=1',
 				'lstvlive']
 
+# saigon tv
 src_sgtv = 		['rtmp://74.63.219.101:1935/sgtv',
 				'http://vietpho.com/ext/js/3/mediaplayer.swf',
 				'http://vietpho.com/online-channels.php?id=41&gID=0&page=1',
 				'sgtv']
 
+# global tv
 src_globaltv = 	['rtmp://unirtmp.tulix.tv:1935/globaltv',
 				'http://vietpho.com/ext/js/3/mediaplayer.swf',
 				'http://vietpho.com/online-channels.php?id=5&gID=0&page=1',
 				'globaltv']
 
+# vbs tv
 src_vbstv = 	['rtmp://74.63.219.101:1935/vbstele',
 				'http://vietpho.com/ext/js/3/mediaplayer.swf',
 				'http://vietpho.com/online-channels.php?id=6&gID=0&page=1',
 				'vbstele']
 
+# vpoptv
 src_vpoptv =	['rtmp://64.62.143.5/live',
 				'http://www.lihattv.com/scripts/videogallery.swf',
 				'http://livetvstreaming.ucoz.com',
 				'']
 
+# lifetv
 src_lifetv = 	['rtmp://video.lifetv.vn/live',
 				'http://www.lihattv.com/scripts/videogallery.swf',
 				'http://livetvstreaming.ucoz.com',
@@ -219,7 +225,7 @@ def show_menu_local():
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
  
 def show_menu_overseas():
-	add_link('Vietface', 'src_vietface',  'urlparams_qm_channel:1005_qm_token:6436488_qm_finished_gops:1',   '',  'vietfacetv.png', 'Vietface Media Group')
+	add_link('Vietface', 'src_vietface',  'urlparams_qm_channel:1005_qm_token:6436488_qm_video:L_qm_audio:L_qm_finished_gops:1',   '',  'vietfacetv.png', 'Vietface Media Group')
 	add_link('SaigonTV', 'src_sgtv',  'myStream.sdp',   '',  'saigontv.png', 'Saigon TV')
 	add_link('GlobalTV', 'src_globaltv',  'myStream.sdp',   '',  'globaltv.png', 'Global Television')
 	add_link('VAN-TV', 'src_vantv',  'streams/live_1',   '',  'vantv.png', 'Vietnamese American Network TV')
