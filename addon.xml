@@ -5,7 +5,7 @@
 	name="TV Viet Nam"
 	provider-name="Binh Nguyen">
 	<requires>
-		<import addon="xbmc.python" version="2.0"/>
+		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="tvvn.py">
 		<provides>video</provides>
