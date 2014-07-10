@@ -7,6 +7,9 @@
 	<string id="30005">New channels list update found</string>
 	<string id="30006">Your channels list is</string>
 	<string id="30007">Proceed with update?</string>
+	<string id="30008">Channels list update</string>
+	<string id="30009">Please wait and DO NOT cancel</string>
+	<string id="30010">Channel list updated, enjoy!</string>
     <string id="30100">tv24.vn settings</string>
     <string id="30101">Use HTTP streams instead of RTMP</string>
 </strings>
