@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 #---------------------------------------------------------------------
 # File: tvvn.py
-# By:   Binh Nguyen <binh@vnoss.org>
-# Date: Thu Jul 10 23:09:31 AEST 2014
+# By:   Binh Nguyen <b@zecoj.com>
+# Date: Fri Jul 11 19:33:48 AEST 2014
 #---------------------------------------------------------------------
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -173,7 +173,7 @@ def play_link(chn, src):
 		app = data['sources'][src]['app']
 
 		full_url = videoUrl+' swfVfy=1 live=1 token='+token+' playpath='+playpath+' flashVer='+flashVer+' pageUrl='+pageUrl+' tcUrl='+videoUrl+' swfUrl='+swfUrl
-	xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(full_url, item)
+	xbmc.Player().play(full_url, item)
 	return
 
 def Init():
