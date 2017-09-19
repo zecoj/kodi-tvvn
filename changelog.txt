@@ -1,3 +1,7 @@
+version 0.9.10 (19/09/2017):
+ * remove all broken sources, TVNet (VTC) is the only active one.
+ * compressed all images properly
+
 version 0.9.9 (18/11/2015):
  * fix fpt, tvnet (ex vtc)
 

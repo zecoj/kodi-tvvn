@@ -1,9 +1,9 @@
 # -*- coding: UTF-8 -*-
 #---------------------------------------------------------------------
 # File: tvvn.py
-# Version: 0.9.9
+# Version: 0.9.10
 # By:   Binh Nguyen <b@zecoj.com>
-# Date: Wed Nov 18 21:46:19 AEDT 2015
+# Date: Tue Sep 19 10:29:01 AEST 2017
 #---------------------------------------------------------------------
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -155,6 +155,8 @@ def update_chn_list():
                                 d_ok = xbmcgui.Dialog().ok(addon.getLocalizedString(30008),addon.getLocalizedString(30010))
 
 def play_link(chn, src):
+        print("xxyyzz 001")
+        xbmc.log("xxyyzz 001")
         item = xbmcgui.ListItem(chn)
         d_progress = xbmcgui.DialogProgress()
         d_progress.create("", addon.getLocalizedString(30009))
@@ -186,12 +188,27 @@ def play_link(chn, src):
 
         #m3u8 url from tvnet
         elif data['channels'][chn]['src']['playpath'] == "m3u8_tvnet":
-            url = 'http://118.107.85.21:1337/get-stream.json?p=smil:'+data['channels'][chn]['src']['page_id']+'.smil&t=l'
-            stringA=opener.open(url).read().decode('utf-8')
-            stringB='"url": "'
-            stringC='"'
-            full_url_BC=re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
-            full_url=full_url_BC
+            url = 'http://au.tvnet.gov.vn/kenh-truyen-hinh/'+data['channels'][chn]['src']['page_id']
+            stringA = opener.open(url).read().decode('utf-8')
+            stringB = 'data-file="'
+            stringC = '"'
+            url = re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
+            
+            stringA = opener.open(url).read().decode('utf-8')
+            stringB = '"url": "'
+            stringC = '"'
+            full_url_BC = re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
+            full_url = full_url_BC
+            print full_url
+
+        #m3u8 url from vtvgo
+        elif data['channels'][chn]['src']['playpath'] == "m3u8_vtvgo":
+            url = data['channels'][chn]['src']['page_url']
+            stringA = opener.open(url).read().decode('utf-8')
+            stringB = "addPlayer('"
+            stringC = "'" 
+            full_url = re.search(re.escape(stringB)+"(.*?)"+re.escape(stringC),stringA).group(1) + '|Referer=http%3A%2F%2Fvtvgo.vn%2F'
+            full_url = "http://play.sohatv.vn/?v=dnR2MQ==&t=20170617133921&autoplay=true" + '|Referer=http://vtv.vn/truyen-hinh-truc-tuyen/vtv1.htm'
             print full_url
 
         #m3u8 url using before & after marker
