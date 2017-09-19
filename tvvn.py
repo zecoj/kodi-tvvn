@@ -29,9 +29,9 @@ except:
         import simplejson as json
 
 addon = xbmcaddon.Addon('plugin.video.tvvn')
-profile = xbmc.translatePath(addon.getAddonInfo('profile'))
 mysettings = xbmcaddon.Addon(id='plugin.video.tvvn')
-home = mysettings.getAddonInfo('path')
+profile = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode('utf-8')
+home = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path')).decode('utf-8')
 fanart = xbmc.translatePath(os.path.join(home, 'fanart.jpg'))
 datafile = xbmc.translatePath(os.path.join(home, 'data.json'))
 
