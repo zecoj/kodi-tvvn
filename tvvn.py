@@ -102,9 +102,13 @@ def add_chn_link (namex):
                         name = name+"    "+desc
 
         give_url = sys.argv[0]+"?mode=1&chn="+namex+"&src="+src
-        liz = xbmcgui.ListItem( name, iconImage=xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)), thumbnailImage=xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)))
-        liz.setInfo(type="Video", infoLabels={"Title": name})
-        liz.setProperty("Fanart_Image",fanart)
+        liz = xbmcgui.ListItem(name)
+        liz.setInfo(type="video", infoLabels={"title": name, "mediatype": "video"})
+        liz.setArt({
+           "icon": xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)),
+           "thumb": xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)),
+           "fanart": fanart
+           })
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=give_url,listitem=liz)
 
 def add_dir_link (namex):
@@ -118,9 +122,13 @@ def add_dir_link (namex):
                         name = desc+"    "+name
                 else:
                         name = name+"    "+desc
-        li = xbmcgui.ListItem( name, iconImage=xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)), thumbnailImage=xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)))
-        li.setInfo(type="Video", infoLabels={"Title": name})
-        li.setProperty("Fanart_Image",fanart)
+        li = xbmcgui.ListItem(name)
+        li.setInfo(type="video", infoLabels={"title": name, "mediatype": "video"})
+        li.setArt({
+           "icon": xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)),
+           "thumb": xbmc.translatePath(os.path.join(home, 'resources', 'logos', iconimage)),
+           "fanart": fanart
+           })
         give_url = sys.argv[0]+"?mode=2&chn="+namex
         return xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=give_url, listitem=li, isFolder=True)
 
