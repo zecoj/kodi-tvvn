@@ -29,6 +29,7 @@
             "logo":  "",
             "desc": "root menu",
             "content": [
+            {"type":"dir","id":"vtvgo"},
             {"type":"chn","id":"vtc_vtv1"},
             {"type":"chn","id":"vtc_vtv2"},
             {"type":"chn","id":"vtc_vtv3"},
@@ -41,7 +42,6 @@
             {"type":"chn","id":"vtc_hn1"},
             {"type":"dir_","id":"fpt"},
             {"type":"dir_","id":"vtc"},
-            {"type":"dir_","id":"vtvgo"},
             {"type":"dir_","id":"hplus"},
             {"type":"dir_","id":"vtvplus"},
             {"type":"dir_","id":"vov"},
@@ -177,7 +177,7 @@
             "src": {
                 "id":"vtvgo",
                 "playpath": "m3u8_vtvgo",
-                "page_url": "http://vtvgo.vn/?xem-truc-tuyen-kenh-VTV1-1.html",
+                "page_url": "http://vtvgo.vn/xem-truc-tuyen-kenh-vtv1-1.html",
                 "url_before": "file: \"",
                 "url_after": "\",",
 				"header": {
@@ -198,8 +198,8 @@
             "desc": "Khoa học, Giáo dục",
             "src": {
                 "id":"vtvgo",
-                "playpath": "m3u8_bau",
-                "page_url": "http://vtvgo.vn/streaming.php?id=2",
+                "playpath": "m3u8_vtvgo",
+                "page_url": "http://vtvgo.vn/xem-truc-tuyen-kenh-vtv2-2.html",
                 "url_before": "file: \"",
                 "url_after": "\",",
 				"header": {
@@ -220,8 +220,8 @@
             "desc": "Thể thao, Giải trí, Thông tin Kinh tế",
             "src": {
                 "id":"vtvgo",
-                "playpath": "m3u8_bau",
-                "page_url": "http://vtvgo.vn/streaming.php?id=3",
+                "playpath": "m3u8_vtvgo",
+                "page_url": "http://vtvgo.vn/xem-truc-tuyen-kenh-vtv3-3.html",
                 "url_before": "file: \"",
                 "url_after": "\",",
 				"header": {
