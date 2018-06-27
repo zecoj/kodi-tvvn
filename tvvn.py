@@ -210,7 +210,7 @@ def play_link(chn, src):
         elif data['channels'][chn]['src']['playpath'] == "m3u8_vtvgo":
             url = data['channels'][chn]['src']['page_url']
             stringA = opener.open(url).read().decode('utf-8')
-            stringB = "addPlayer('"
+            stringB = "var link = '"
             stringC = "'" 
             full_url = re.search(re.escape(stringB)+"(.*?)"+re.escape(stringC),stringA).group(1) + '|Referer=http%3A%2F%2Fvtvgo.vn%2F'
             print full_url
