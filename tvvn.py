@@ -18,9 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #---------------------------------------------------------------------
 
-import os, re, sys, gzip, urllib, urllib2, string, xbmcaddon, xbmcplugin, xbmcgui, xbmcvfs
-from StringIO import StringIO
-from cookielib import CookieJar
+import os, re, sys, gzip, urllib.request, urllib.parse, urllib.error, urllib.request, urllib.error, urllib.parse, string, xbmcaddon, xbmcplugin, xbmcgui, xbmcvfs
+from io import BytesIO
+from http.cookiejar import CookieJar
 
 try:
         import json
@@ -29,8 +29,8 @@ except:
 
 addon = xbmcaddon.Addon('plugin.video.tvvn')
 mysettings = xbmcaddon.Addon(id='plugin.video.tvvn')
-profile = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode('utf-8')
-home = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path')).decode('utf-8')
+profile = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile'))
+home = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path'))
 fanart = xbmc.translatePath(os.path.join(home, 'fanart.jpg'))
 datafile = xbmc.translatePath(os.path.join(home, 'data.json'))
 
@@ -58,9 +58,9 @@ def get_params():
 
 params=get_params()
 
-try:         chn=urllib.unquote_plus(params["chn"])
+try:         chn=urllib.parse.unquote_plus(params["chn"])
 except: pass
-try:         src=urllib.unquote_plus(params["src"])
+try:         src=urllib.parse.unquote_plus(params["src"])
 except: pass
 try:         mode=int(params["mode"])
 except: pass
@@ -133,16 +133,16 @@ def add_dir_link (namex):
 
 def update_chn_list():
         url = mysettings.getSetting('json_url')
-        request = urllib2.Request(url)
+        request = urllib.request.Request(url)
         request.add_header('Accept-encoding', 'gzip')
         url_error = "no"
         try:
-                response = urllib2.urlopen(request)
-        except urllib2.URLError, e:
+                response = urllib.request.urlopen(request)
+        except urllib.error.URLError as e:
                 url_error = "yes"
 
         if (url_error == "no"):
-                buf = StringIO(response.read())
+                buf = BytesIO(response.read())
                 f = gzip.GzipFile(fileobj=buf)
                 ff=f.read()
                 r_data=json.loads(ff)
@@ -167,15 +167,15 @@ def play_link(chn, src):
         d_progress.create("", addon.getLocalizedString(30009))
 
         cj = CookieJar()
-        opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
 
         #login if required
         if src in data['sources'] and 'login' in data['sources'][src] and data['sources'][src]['login'] == "true":
             url = data['sources'][src]['url']
             values = data['sources'][src]['post']
-            post_data = urllib.urlencode(values)
+            post_data = urllib.parse.urlencode(values)
             response = opener.open(url, post_data)
-            the_page = response.read()
+            the_page = response.read().decode("utf-8")
 
         #m3u8 url from fpt
         if data['channels'][chn]['src']['playpath'] == "m3u8_fpt":
@@ -183,37 +183,37 @@ def play_link(chn, src):
             page_id = data['channels'][chn]['src']['page_id']
             page_q = data['channels'][chn]['src']['page_q']
             values={'id': page_id, 'type': 'newchannel', 'quality': page_q, 'mobile': 'web'}
-            post_data = urllib.urlencode(values)
+            post_data = urllib.parse.urlencode(values)
             header = {'Content-Type': 'application/x-www-form-urlencoded', 'Host':'fptplay.net','Origin':'http://fptplay.net','X-Requested-With':'XMLHttpRequest', 'Referer':'http://fptplay.net/livetv'}
-            req = urllib2.Request(url, post_data, header)
-            response = urllib2.urlopen(req)
-            the_page = response.read()
+            req = urllib.request.Request(url, post_data, header)
+            response = urllib.request.urlopen(req)
+            the_page = response.read().decode("utf-8")
             the_data = json.loads(the_page)
             full_url=the_data['stream']
 
         #m3u8 url from tvnet
         elif data['channels'][chn]['src']['playpath'] == "m3u8_tvnet":
             url = 'http://au.tvnet.gov.vn/kenh-truyen-hinh/'+data['channels'][chn]['src']['page_id']
-            stringA = opener.open(url).read().decode('utf-8')
+            stringA = opener.open(url).read().decode("utf-8")
             stringB = 'data-file="'
             stringC = '"'
             url = re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
-            
-            stringA = opener.open(url).read().decode('utf-8')
+
+            stringA = opener.open(url).read().decode("utf-8")
             stringB = '"url": "'
             stringC = '"'
             full_url_BC = re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
             full_url = full_url_BC
-            print full_url
+            print(full_url)
 
         #m3u8 url from vtvgo
         elif data['channels'][chn]['src']['playpath'] == "m3u8_vtvgo":
             url = data['channels'][chn]['src']['page_url']
-            stringA = opener.open(url).read().decode('utf-8')
+            stringA = opener.open(url).read().decode("utf-8")
             stringB = "var link = '"
-            stringC = "'" 
+            stringC = "'"
             full_url = re.search(re.escape(stringB)+"(.*?)"+re.escape(stringC),stringA).group(1) + '|Referer=http%3A%2F%2Fvtvgo.vn%2F'
-            print full_url
+            print(full_url)
 
         #m3u8 url using before & after marker
         elif data['channels'][chn]['src']['playpath'] == "m3u8_bau":
@@ -227,13 +227,13 @@ def play_link(chn, src):
                 post=None
 
             if header==None:
-                req = urllib2.Request(data['channels'][chn]['src']['page_url'], post)
+                req = urllib.request.Request(data['channels'][chn]['src']['page_url'], post)
             else:
-                req = urllib2.Request(data['channels'][chn]['src']['page_url'], post, header)
+                req = urllib.request.Request(data['channels'][chn]['src']['page_url'], post, header)
 
-            response = urllib2.urlopen(req)
+            response = urllib.request.urlopen(req)
             #print(response)
-            the_page = response.read()
+            the_page = response.read().decode("utf-8")
             #print(the_page)
 
             stringA=the_page
