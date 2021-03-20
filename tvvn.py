@@ -34,7 +34,7 @@ home = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path'))
 fanart = xbmc.translatePath(os.path.join(home, 'fanart.jpg'))
 datafile = xbmc.translatePath(os.path.join(home, 'data.json'))
 
-data = json.loads(open(datafile,"r").read())
+data = json.loads(open(datafile,"r",encoding="utf8").read())
 
 mode=None
 
