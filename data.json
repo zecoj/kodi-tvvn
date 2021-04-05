@@ -1,5 +1,5 @@
 {
-    "timestamp":"1518137959",
+    "timestamp":"1617605452",
     "sources": {
         "vtvgo": {
             "url": "http://vtvgo.vn/streaming.php?id=XXX_PID",
@@ -16,7 +16,6 @@
             "logo":  "",
             "desc": "root menu",
             "content": [
-            {"type":"dir","id":"vtvgo"},
             {"type":"chn","id":"vtc_vtv1"},
             {"type":"chn","id":"vtc_vtv2"},
             {"type":"chn","id":"vtc_vtv3"},
@@ -37,6 +36,7 @@
             {"type":"chn","id":"vtc_haiphong"},
             {"type":"chn","id":"vtc_thanhhoa"},
             {"type":"chn","id":"vtc_nghean"},
+            {"type":"dir_","id":"vtvgo"},
             {"type":"dir_","id":"fpt"},
             {"type":"dir_","id":"vtc"},
             {"type":"dir_","id":"hplus"},

@@ -1,3 +1,6 @@
+version 0.9.21 (05/04/2021):
+ * Python 3 compatiblity to support Kodi 19 only going forward.
+
 version 0.9.12 (09/10/2017):
  * re-add vtvgo source
 

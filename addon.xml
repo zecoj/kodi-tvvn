@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
 	id="plugin.video.tvvn"
-	version="0.9.12"
+	version="0.9.21"
 	name="TV Viet Nam"
 	provider-name="Binh Nguyen">
 	<requires>
-		<import addon="xbmc.python" version="2.25.0"/>
+		<import addon="xbmc.python" version="3.0.0"/>
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="tvvn.py">
 		<provides>video</provides>
