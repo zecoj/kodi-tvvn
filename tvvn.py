@@ -18,14 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #---------------------------------------------------------------------
 
-import os, re, sys, gzip, urllib, string, xbmcaddon, xbmcplugin, xbmcgui, xbmcvfs
+import os, re, sys, gzip, urllib, string, json, xbmcaddon, xbmcplugin, xbmcgui, xbmcvfs
 from io import BytesIO
 from http.cookiejar import CookieJar
-
-try:
-    import json
-except:
-    import simplejson as json
 
 addon = xbmcaddon.Addon('plugin.video.tvvn')
 mysettings = xbmcaddon.Addon(id='plugin.video.tvvn')
@@ -34,7 +29,7 @@ home = xbmcvfs.translatePath(xbmcaddon.Addon().getAddonInfo('path'))
 fanart = xbmcvfs.translatePath(os.path.join(home, 'fanart.jpg'))
 datafile = xbmcvfs.translatePath(os.path.join(home, 'data.json'))
 
-data = json.loads(open(datafile,"r").read())
+data = json.loads(open(datafile,"r",encoding="utf8").read())
 
 mode=None
 
