@@ -190,7 +190,7 @@ def play_link(chn, src):
     elif data['channels'][chn]['src']['playpath'] == "m3u8_tvnet":
         url = 'http://au.tvnet.gov.vn/kenh-truyen-hinh/'+data['channels'][chn]['src']['page_id']
         stringA = opener.open(url).read().decode('utf-8')
-        stringB = 'data-file="'
+        stringB = 'let ownURL = "'
         stringC = '"'
         url = re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
         
@@ -198,8 +198,13 @@ def play_link(chn, src):
         stringB = '"url": "'
         stringC = '"'
         full_url_BC = re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
-        full_url = full_url_BC
-
+        stringA = opener.open(full_url_BC).read().decode('utf-8')
+        stringB = "chunklist_"
+        stringC = ".m3u8"
+        chunk_id = re.search(stringB+"(.*?)"+re.escape(stringC),stringA).group(1)
+        pre_urlA = full_url_BC.split("/")
+        del pre_urlA[-1]
+        full_url = "/".join(pre_urlA) +"/"+ stringB + chunk_id + stringC
     #m3u8 url from vtvgo
     elif data['channels'][chn]['src']['playpath'] == "m3u8_vtvgo":
         url = data['channels'][chn]['src']['page_url']
